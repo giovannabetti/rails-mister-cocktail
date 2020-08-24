@@ -1,7 +1,26 @@
-<h1>My super cocktails</h1>
-
-<ul>
-  <% @cocktails.each do |cocktail| %>
-    <li><%= link_to cocktail.name, cocktail_path(cocktail.id) %></li>
-  <% end %>
-</ul>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'cocktails.jpg' %>');">
+  <div class="banner-content">
+    <h1>The Super Cocktails Bar</h1>
+    <p>Awesome beverages for developers nightlife</p>
+    <%= link_to "Add a cocktail", new_cocktail_path, class: "btn btn-primary btn-lg" %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-12 col-md-6 col-lg-3">
+        <% if cocktail.photo? %>
+          <% background_url = cl_image_path cocktail.photo, width: 400, height: 500, crop: :fill %>
+        <% else %>
+          <% background_url = 'https://source.unsplash.com/500x400/?cocktail' %>
+        <% end %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= background_url %>');">
+          <div class="card-description">
+            <h2><%= cocktail.name %></h2>
+          </div>
+          <%= link_to "", cocktail_path(cocktail), class: 'card-link' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
